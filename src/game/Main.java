@@ -1,5 +1,6 @@
 package game;
 
+import java.io.File;
 import java.util.List;
 import java.util.Scanner;
 
@@ -41,6 +42,10 @@ public class Main
 
 
         Player.newPlayer();
+
+
+        Game.guessing();
+        System.out.println();
 
     }
 }

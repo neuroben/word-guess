@@ -1,5 +1,6 @@
 package game;
 
+import javax.print.attribute.standard.MediaSize;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,5 +47,28 @@ public class FileUtil
             e.printStackTrace();
         }
         return players;
+    }
+    public static List<String> importWords(String fileName)
+    {
+        List<String> words = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName)))
+        {
+            String line;
+            while ((line = reader.readLine()) != null)
+            {
+                words.add(line);
+            }
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        /*
+        for (int i = 0; i < words.size(); i++)
+        {
+            System.out.println(words.get(i));
+        }
+        */
+        return words;
     }
 }

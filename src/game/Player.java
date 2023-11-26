@@ -8,6 +8,8 @@ public class Player {
     String name;
     int score;
 
+    static List<Player> players = FileUtil.importPlayers("players.csv");
+
     public void setName(String name){
         this.name = name;
     }
@@ -22,9 +24,9 @@ public class Player {
         return score;
     }
 
-    public static List<Player> newPlayer()
+    public static void newPlayer()
     {
-        List<Player> players = FileUtil.importPlayers("players.csv");
+
 
         Scanner input = new Scanner(System.in);
         Player newPlayer = new Player();
@@ -33,8 +35,8 @@ public class Player {
             System.out.println(player.getName() + " " + player.getScore());
         }*/
 
-        System.out.println("Enter your name:");
-        String inName = input.nextLine();
+        System.out.print("Enter your name: ");
+        String inName = input.next();
 
         //checking if name already exits
         for (Player player : players) {
@@ -42,18 +44,19 @@ public class Player {
                 System.out.println("Welcome back: " + inName + "! Your score is: " + player.getScore() + " Do you to delete your scores? (Y/N)");
                 if (Objects.equals(input.nextLine(), "Y")) {
                     player.setScore(0);
-                    return players;
+                    return;
                 }else {
-                    return players;
+                    return;
                 }
             }
         }
+/*
+        for (int i = 0; i < players.size(); i++){
+            System.out.println(i + ". játékos neve: " + players.get(i).getName() + " játékos pontszáma: " + players.get(i).getScore());
+        }
+*/
         newPlayer.setName(inName);
         newPlayer.setScore(0);
         players.add(newPlayer);
-
-        return players;
-
     }
-    //public static List<Words>
 }
