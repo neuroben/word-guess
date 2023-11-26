@@ -1,11 +1,5 @@
 package game;
 
-import java.io.File;
-import java.util.List;
-import java.util.Scanner;
-
-import static java.lang.Integer.parseInt;
-
 public class Main
 {
     public static void main(String[] args)
@@ -39,13 +33,10 @@ public class Main
         }
 */
 
-
-
         Player.newPlayer();
-
-
         Game.guessing();
-        System.out.println();
+        FileUtil.saveProgress();
+
 
     }
 }

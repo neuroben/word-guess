@@ -1,11 +1,10 @@
 package game;
 
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static game.Player.players;
 import static java.lang.Integer.parseInt;
 
 public class FileUtil
@@ -31,8 +30,6 @@ public class FileUtil
             String line;
             while ((line = reader.readLine()) != null)
             {
-                String name;
-                int score;
 
                 Player newPlayer = new Player();
 
@@ -69,5 +66,15 @@ public class FileUtil
         }
         */
         return words;
+    }
+    public static void saveProgress() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("players.csv"))) {
+            for (Player player : players) {
+                writer.write(player.getName() + "," + player.getScore());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing players to file: " + e.getMessage());
+        }
     }
 }

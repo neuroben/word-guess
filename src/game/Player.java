@@ -7,8 +7,13 @@ import java.util.Scanner;
 public class Player {
     String name;
     int score;
+    static Player activePlayer = new Player();
 
     static List<Player> players = FileUtil.importPlayers("players.csv");
+
+    public static Player getActivePlayer() {
+        return activePlayer;
+    }
 
     public void setName(String name){
         this.name = name;
@@ -31,21 +36,29 @@ public class Player {
         Scanner input = new Scanner(System.in);
         Player newPlayer = new Player();
 
+
         /*for (Player player : players) {
             System.out.println(player.getName() + " " + player.getScore());
         }*/
 
         System.out.print("Enter your name: ");
-        String inName = input.next();
+        String inName = input.nextLine();
+        Format.hLine();
 
         //checking if name already exits
         for (Player player : players) {
             if (Objects.equals(player.getName(), inName)) {
                 System.out.println("Welcome back: " + inName + "! Your score is: " + player.getScore() + " Do you to delete your scores? (Y/N)");
-                if (Objects.equals(input.nextLine(), "Y")) {
+                if (Objects.equals(input.nextLine().toUpperCase().charAt(0), 'Y')) {
                     player.setScore(0);
+                    activePlayer = player;
+                    System.out.println("Score set to: 0");
+                    Format.hLine();
                     return;
                 }else {
+                    activePlayer = player;
+                    System.out.println("Score unchanged.");
+                    Format.hLine();
                     return;
                 }
             }
@@ -58,5 +71,6 @@ public class Player {
         newPlayer.setName(inName);
         newPlayer.setScore(0);
         players.add(newPlayer);
+        activePlayer = newPlayer;
     }
 }
